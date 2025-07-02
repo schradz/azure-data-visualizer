@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+# Virtual Environments
+env/
+venv/
+# Testing Frameworks
+.pytest_cache/
+.coverage
+# IDEs
+.vscode/ # VS Code specific files
+.idea/   # PyCharm specific files
+# General
+*.log
+*.sqlite3 # If you add a local database later
