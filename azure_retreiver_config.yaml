@@ -1,0 +1,31 @@
+queries:
+      epic_descendants:
+        description: "Test query for hierarchical descendants."
+        wiql: |
+          SELECT
+              [System.Id],
+              [System.Title],
+              [Microsoft.VSTS.Scheduling.Effort],
+              [System.WorkItemType],
+              [System.State]
+          FROM
+              WorkItemLinks
+          WHERE
+              (Source.[System.WorkItemType] = 'Epic' AND Source.[System.Id] = {epic_id})
+              AND (LinkType = 'System.LinkTypes.Hierarchy-Forward')
+          MODE (Recursive, ReturnMatchingChildren)
+
+      epics_only_query:
+        description: "Test query to find all Epics that are not in 'Closed' or 'Removed' state."
+        wiql: |
+          SELECT
+              [System.Id],
+              [System.Title],
+              [System.State]
+          FROM
+              WorkItems
+          WHERE
+              [System.WorkItemType] = 'Epic'
+              AND [System.State] <> 'Closed'
+              AND [System.State] <> 'Removed'
+          ORDER BY [System.Id]
